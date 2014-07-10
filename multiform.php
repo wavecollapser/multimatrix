@@ -17,8 +17,8 @@ function MultiMatrix_save()
 {
     $fields=$_POST['fields'];
 
-    $xmax=$_POST['maxfieldsx'];
-    $ymax=$_POST['maxfieldsy'];
+    $xmax=strip_tags($_POST['maxfieldsx']);
+    $ymax=strip_tags($_POST['maxfieldsy']);
 
     $cnt=0; $x=0; $y=0; $cont=0;
     $rowdata=array();
@@ -54,7 +54,7 @@ function MultiMatrix_print(&$rowdata,$numrows=0)
     {
         $str = join(",",$rowdata[$i]);
 
-        // do your mysql stuff here, remember to escape $str yourself!
+        // do your mysql stuff here, remember you must escape $str yourself!
         echo "row: " . $str ."<br>";
     }
 
