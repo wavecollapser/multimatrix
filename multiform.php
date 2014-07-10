@@ -7,8 +7,8 @@
  * FUNCTIONS:
  * save/show any number of text fields into your database with php
  *
- * DYNAMICALLY FIELD MATRIX GENERATOR
- * /
+ * DYNAMICAL FIELD MATRIX GENERATOR
+ */
 
 
 /* Save POST result in array $rowdata
@@ -17,33 +17,33 @@ function MultiMatrix_save()
 {
     $fields=$_POST['fields'];
 
-    $maxx=$_POST['maxfieldsx'];
-    $maxy=$_POST['maxfieldsy'];
+    $xmax=$_POST['maxfieldsx'];
+    $ymax=$_POST['maxfieldsy'];
 
     $cnt=0; $x=0; $y=0; $cont=0;
     $rowdata=array();
 
-    for ($x=0;$x<$maxx;$x++)
+    for ($x=0;$x<$xmax;$x++)
     {
-        for ($y=0;$y<$maxy;$y++)
+        for ($y=0;$y<$ymax;$y++)
         {
             $rowdata[$x][$cnt]=$fields[$cont++];
 
-            if ($cnt < $maxy)
+            if ($cnt < $ymax)
                 $cnt++;
             else  /* end of row */
                 $cnt=0;
         }
     }
 
-    if ($maxx == 0 && $maxy==0)
+    if ($xmax == 0 && $ymax==0)
     {
         /* print a textarea */
         $rowdata[0][0]=$fields[$cont++];
         MultiMatrix_print($rowdata,$numrows=1);
     }
     else
-        MultiMatrix_print($rowdata,$numrows=$maxx);
+        MultiMatrix_print($rowdata,$numrows=$xmax);
 }
 
 /* Print all rows for a POST result */
@@ -53,7 +53,8 @@ function MultiMatrix_print(&$rowdata,$numrows=0)
     for ($i=0;$i<($numrows);$i++)
     {
         $str = join(",",$rowdata[$i]);
-        // do your mysql stuff here!
+
+        // do your mysql stuff here, remember to escape $str yourself!
         echo "row: " . $str ."<br>";
     }
 
