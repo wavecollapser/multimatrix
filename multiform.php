@@ -10,7 +10,6 @@
  * DYNAMICAL FIELD MATRIX GENERATOR
  */
 
-
 /* Save POST result in array $rowdata
  * Must be called before printing */
 function MultiMatrix_save()
