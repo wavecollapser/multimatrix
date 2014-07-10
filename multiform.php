@@ -15,6 +15,8 @@
  * Must be called before printing */
 function MultiMatrix_save()
 {
+    // allow html fields, so don't escape them.
+    // you must escape your end array before using in MySQL
     $fields=$_POST['fields'];
 
     $xmax=strip_tags($_POST['maxfieldsx']);
