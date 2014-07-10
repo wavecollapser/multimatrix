@@ -16,17 +16,12 @@
 function MultiMatrix_save()
 {
     $fields=$_POST['fields'];
-    //print_r($fields);
+
     $maxx=$_POST['maxfieldsx'];
     $maxy=$_POST['maxfieldsy'];
-    //echo "maxx: $maxx , maxy: $maxy<br>";
 
-    $cnt=0;
-    $x=0;
-    $z=0;
+    $cnt=0; $x=0; $y=0; $cont=0;
     $rowdata=array();
-    $cont=0;
-    $y=0;
 
     for ($x=0;$x<$maxx;$x++)
     {
@@ -39,7 +34,6 @@ function MultiMatrix_save()
             else  /* end of row */
                 $cnt=0;
         }
-
     }
 
     if ($maxx == 0 && $maxy==0)
@@ -55,13 +49,12 @@ function MultiMatrix_save()
 /* Print all rows for a POST result */
 function MultiMatrix_print(&$rowdata,$numrows=0)
 {
-//print_r($rowdata);
     $i=0;
     for ($i=0;$i<($numrows);$i++)
     {
         $str = join(",",$rowdata[$i]);
+        // do your mysql stuff here!
         echo "row: " . $str ."<br>";
-        //echo "row: " . implode(",",$rowdata[$i]) . "<br>";
     }
 
 }
@@ -77,6 +70,7 @@ function MultiMatrix_textarea($field_data=NULL,$rows=25,$cols=15)
     echo "<br>";
     echo "<input type=reset value=Reset><input type=submit value=Save></form>";
 }
+
 function MultiMatrix($maxfieldsx=8, $maxfieldsy=3, 
     $colwidth=NULL, $coltitles=NULL, $field_data=NULL)
 {
