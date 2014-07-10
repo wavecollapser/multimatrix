@@ -57,7 +57,7 @@ $field_data=array(
     );
 
 // spawn a multi matrix with many fields
-MultiMatrix($maxfieldsx=3,$maxfieldsy=2,$colwidth=NULL,$coltitles1,$field_data1);
+MultiMatrix($maxfieldsx=3,$maxfieldsy=2,$colwidth_arr=NULL,$coltitles1,$field_data1);
 
 // spawn a multi matrix with many fields
 MultiMatrix($maxfieldsx=8,$maxfieldsy=3,$colwidth,$coltitles,$field_data);
