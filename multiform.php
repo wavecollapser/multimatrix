@@ -37,7 +37,7 @@ function MultiMatrix_save()
         }
     }
 
-    if ($xmax == 0 && $ymax==0)
+    if ($xmax==0 && $ymax==0)
     {
         /* print a textarea */
         $rowdata[0][0]=$fields[$cont++];
