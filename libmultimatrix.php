@@ -10,6 +10,13 @@
  * DYNAMICAL FIELD MATRIX GENERATOR
  */
 
+// Library constants
+$UPDATE_YES="UPDATE_YES";
+$UPDATE_NO="UPDATE_NO";
+
+// row data will be .,,,...,s:checkon
+// for rows which are checked
+
 /* Save POST result in array $rowdata
  * Must be called before printing */
 function MultiMatrix_save()
@@ -20,6 +27,7 @@ function MultiMatrix_save()
 
     $xmax=strip_tags($_POST['maxfieldsx']);
     $ymax=strip_tags($_POST['maxfieldsy']);
+    $maxcheckboxes=strip_tags($_POST['maxcheckboxes']);
 
     $cnt=0; $x=0; $y=0; $cont=0;
     $rowdata=array();
@@ -30,11 +38,21 @@ function MultiMatrix_save()
         {
             $rowdata[$x][$cnt]=$fields[$cont++];
 
-            if ($cnt < $ymax)
-                $cnt++;
-            else  /* end of row */
-                $cnt=0;
+            $cnt++;
         }
+        for ($y=0;$y<$maxcheckboxes;$y++)
+        {
+            if ($fields[$cont] == "s:checkon")
+            {
+                $rowdata[$x][$cnt]=$fields[$cont];
+            }
+
+            $cont++;
+            $cnt++;
+        }
+
+        $cnt=0;
+
     }
 
     if ($xmax==0 && $ymax==0)
@@ -74,7 +92,8 @@ function MultiMatrix_textarea($field_data=NULL,$rows=25,$cols=15)
 }
 
 function MultiMatrix($maxfieldsx=8, $maxfieldsy=3, 
-    $colwidth=NULL, $coltitles=NULL, $field_data=NULL)
+    $colwidth=NULL, $coltitles=NULL, $field_data=NULL,
+    $maxcheckboxes=0, $checkbox_data=NULL)
 {
     // size of each row's elements, pass an arr to this function with it
     if (!$colwidth)
@@ -93,7 +112,8 @@ function MultiMatrix($maxfieldsx=8, $maxfieldsy=3,
         echo "</tr>";
     }
     echo "<input type=hidden name=maxfieldsx value=" . $maxfieldsx . ">";
-    echo "<input type=hidden name=maxfieldsy value=" .$maxfieldsy .">";
+    echo "<input type=hidden name=maxfieldsy value=" . $maxfieldsy .">";
+    echo "<input type=hidden name=maxcheckboxes value=" . $maxcheckboxes .">";
     $cnt=0;
     for ($x=0;$x<$maxfieldsx;$x++)
     {
@@ -107,6 +127,16 @@ function MultiMatrix($maxfieldsx=8, $maxfieldsy=3,
             echo "</td>";
             $cnt++;
         }
+        $cnt2=0;
+        for ($y=0;$y<$maxcheckboxes;$y++)
+        {
+            echo "<td>";
+            echo "<input type=checkbox name=fields[] " .
+                 $checkbox_data[$cnt2] . " value=\"s:checkon\">";
+            echo "</td>";
+            $cnt2++;
+        }
+        
         echo "</tr>";
     }
     echo "</table><input type=submit></form>";

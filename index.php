@@ -1,15 +1,22 @@
 <?php
-include 'multiform.php';
+include 'libmultimatrix.php';
 MultiMatrix_save();
-
-// library constants
-$UPDATE_YES=35135;
-$UPDATE_NO=35134;
 
 // the field you want to update on should have $UPDATE_YES set
 // all other fields UPDATE_NO
 // Update foo set ID=xx,Title=yy,Text=zz where ID=xx; will result
 // (update on UPDATE_YES cols)
+$coltitles3=array(
+    "ID"        => $UPDATE_YES,
+    "Title"     => $UPDATE_NO,
+    "Text"      => $UPDATE_NO,
+    "Delete"    => $UPDATE_NO
+);
+$coltitles2=array(
+    "ID"        => $UPDATE_YES,
+    "Title"     => $UPDATE_NO,
+    "Edit"      => $UPDATE_NO
+);
 $coltitles1=array(
     "ID"        => $UPDATE_YES,
     "Title"     => $UPDATE_NO,
@@ -64,5 +71,38 @@ MultiMatrix($maxfieldsx=8,$maxfieldsy=3,$colwidth,$coltitles,$field_data);
 //
 // spawn a multi matrix with one text area
 MultiMatrix_textarea($field_data,$rows=5,$cols=35);
+
+// spawn a multi matrix with many fields + a few checkboxes too!
+$checkbox_data=array(
+    "checked",
+    "",
+    "checked"
+);
+$checkbox_data1=array(
+    ""
+);
+MultiMatrix($maxfieldsx=3,$maxfieldsy=2,$colwidth_arr=NULL,$coltitles2,$field_data1, $maxcheckboxes=3,$checkbox_data);
+
+// spawn a multi matrix with many fields + delete checkbox (typical use)!
+$coltitles3=array(
+    "ID"        => $UPDATE_YES,
+    "Title"     => $UPDATE_NO,
+    "Text"      => $UPDATE_NO,
+    "Delete"    => $UPDATE_NO
+);
+$field_data=array(
+    0=>"hey",
+    1=>"hey",
+    2=>"hey",
+    3=>"hey"
+);
+MultiMatrix(
+    $maxfieldsx=8,$maxfieldsy=3,
+    $colwidth_arr=NULL,
+    $coltitles3,
+    $field_data,
+    $maxcheckboxes=1,
+    $checkbox_data1
+);
 
 ?>
