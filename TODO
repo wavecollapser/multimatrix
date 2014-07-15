@@ -2,8 +2,5 @@ TO ADD FEATURES
 
 add admin ctls to the right of a matrix if enabled
     i.e. <Delete> , delete on UPDATE_ON_COL
-
-    NEAT SOLUTION:
-    just add "DELETE CHECKBOXES" right to the matrix rows!!!
-
-    is a quick and nice fix
+    
+    *** partially fixed, added delete checkboxes i.e. ***
