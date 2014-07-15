@@ -16,6 +16,10 @@
 $UPDATE_YES="UPDATE_YES";
 $UPDATE_NO="UPDATE_NO";
 
+$CHECKON_STR="s:checkon";
+$CHECKOFF_STR="s:checkoff";
+
+
 // row data will be .,,,...,s:checkon
 // for rows which are checked
 
@@ -23,6 +27,9 @@ $UPDATE_NO="UPDATE_NO";
  * Must be called before printing */
 function MultiMatrix_save()
 {
+    global $CHECKON_STR;
+    global $CHECKOFF_STR;
+
     // allow html fields, so don't escape them.
     // you must escape your end array before using in MySQL
     $fields=$_POST['fields'];
@@ -33,21 +40,30 @@ function MultiMatrix_save()
 
     $cnt=0; $x=0; $y=0; $cont=0;
     $rowdata=array();
-
+    
     for ($x=0;$x<$xmax;$x++)
     {
-        for ($y=0;$y<$ymax;$y++)
+        for ($y=0;$y<($ymax + $maxcheckboxes);$y++)
         {
-            $rowdata[$x][$cnt]=$fields[$cont++];
+            $data=$fields[$cont];
 
-            $cnt++;
-        }
-        for ($y=0;$y<$maxcheckboxes;$y++)
-        {
-            if ($fields[$cont] == "s:checkon")
+            // this is a checkbox
+            // they don't set a default value if empty
+            // so we must do it
+            if ($y > ($ymax-1))
             {
-                $rowdata[$x][$cnt]=$fields[$cont];
+                if ($data!=$CHECKON_STR)
+                    $data=$CHECKOFF_STR;
+
+                if ($data != $CHECKON_STR)
+                // if there was s:checkon data (toggled checklist)
+                // do NOT increase counter for this col
+                // because there was never any col in $_POST
+                $cont--;
             }
+
+            $rowdata[$x][$cnt]=$data;
+
 
             $cont++;
             $cnt++;
