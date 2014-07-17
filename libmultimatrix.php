@@ -36,6 +36,8 @@ function MultiMatrix_save()
 
     $xmax=strip_tags($_POST['maxfieldsx']);
     $ymax=strip_tags($_POST['maxfieldsy']);
+    if ($xmax == "") $xmax=0;
+    if ($xmax == "") $xmax=0;
     $maxcheckboxes=strip_tags($_POST['maxcheckboxes']);
 
     $cnt=0; $x=0; $y=0; $cont=0;
@@ -122,9 +124,9 @@ function MultiMatrix($maxfieldsx=8, $maxfieldsy=3,
     }
 
     echo "<form method=post action=>";
-    echo "<table>";
+    echo "<table class=matrix>";
     if ($coltitles!=NULL) {
-        echo "<tr>";
+        echo "<tr class=title>";
         foreach ($coltitles as $k => $w)
             echo "<td>" . $k . "</td>";
         echo "</tr>";
@@ -135,7 +137,7 @@ function MultiMatrix($maxfieldsx=8, $maxfieldsy=3,
     $cnt=0;
     for ($x=0;$x<$maxfieldsx;$x++)
     {
-        echo "<tr>";
+        echo "<tr class=fields>";
         for ($y=0;$y<$maxfieldsy;$y++)
         {
             $width=$colwidth[$y];

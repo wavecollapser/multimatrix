@@ -1,3 +1,7 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
 <?php
 include 'libmultimatrix.php';
 MultiMatrix_save();
@@ -98,7 +102,7 @@ $field_data=array(
 );
 MultiMatrix(
     $maxfieldsx=8,$maxfieldsy=3,
-    $colwidth_arr=NULL,
+    $colwidth_arr=$colwidth,
     $coltitles3,
     $field_data,
     $maxcheckboxes=1,
